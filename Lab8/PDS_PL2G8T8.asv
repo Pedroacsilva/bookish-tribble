@@ -110,19 +110,13 @@ plot(-1 * MAXLAG:MAXLAG, r_hat); grid on; xlabel('k'); ylabel('r_{hat}[k]'); tit
 %de 32 amostras (N = 32) assim:
 %autocorrelacao dum processo harmonico:
 %r_x[k] = (A^2)/2 * cos(w_o * k)
-N = 32;                     %Periodo da autocorrelação (em amostras)
+N = 32;                     %Periodo da autocorrelação
 w_o = 2 * pi / N;           %Frequencia em radianos
 f_hz = fs / N;              %Frequencia em hertz
-A = sqrt(2 * r_hat(71-32));    %Amplitude
-noise_pow = r_hat(71) - r_hat(71 + 32);      %Potencia do ruido branco
-%r_hat[0] é a potencia do sinal + ruido, r_hat[k*N] é a potencia do sinal,
-%logo r_hat[0] - r_hat[k*N] = potencia do ruido branco
-rr = (A^2/2)*cos(w_o*(-MAXLAG:MAXLAG));         %Estimativa da autocorrelação teorica com parametros determinados na alinea anterior
-rr(71) = rr(71) + noise_pow;
-fig8;
-plot(-MAXLAG:MAXLAG, r_hat, 'b', -MAXLAG:MAXLAG, rr, 'r'); legend('r_{hat}', 'r _{teorico}'); grid on; xlabel('k'); ylabel('r_{hat}[k]'); title('Autocorrelação do sinal harmonicproc.wav'); xlim([-1 * MAXLAG MAXLAG]);
+A = sqrt(2 * r_hat(71));    %Amplitude
 MSG = ['Frequencia da autocorrelacao em radianos: ', num2str(w_o), ' (rad). Em Hz: ', num2str(f_hz), ' (Hz).'];
 disp(MSG)
+
 
 
 
